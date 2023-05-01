@@ -1,0 +1,19 @@
+{
+  "name": "technical_assigment",
+  "version": "1.0.0",
+  "description": "Cypress technical assigment",
+  "main": "index.js",
+  "scripts": {
+    "runAllTests-headless": "npx cypress run",
+    "runAllTests-headed": "npx cypress run --headed",
+    "runAllTests-chrome": "npx cypress run --browser chrome --headed",
+    "runOnlyUITests": "npx cypress run --browser chrome --headed --spec cypress/e2e/UI_e2e_tests/*",
+    "runOnlyAPITests": "npx cypress run --spec cypress/e2e/API_tests/*"
+  },
+  "author": "Andrii Prokofiev",
+  "license": "ISC",
+  "devDependencies": {
+    "@cypress/xpath": "^2.0.3",
+    "cypress": "^12.11.0"
+  }
+}
