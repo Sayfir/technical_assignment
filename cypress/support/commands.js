@@ -9,10 +9,19 @@
 // ***********************************************
 //
 
-Cypress.Commands.add("login", (login, password) => {
-  cy.get("#username").type(login);
-  cy.get("#password").type(password);
-  cy.get("[type=submit]").click();
+Cypress.Commands.add("login", () => {
+  cy.fixture("loginData.json").as("loginData");
+  //Session implementation
+  cy.get("@loginData").then((loginData) => {
+    cy.session(`User_${loginData.login}`, () => {
+      cy.visit("/" + "login");
+      cy.get("#username").type(loginData.login);
+      cy.get("#password").type(loginData.password);
+      cy.get("[type=submit]").click();
+    });
+  });
+  cy.visit("/");
+  cy.xpath("//a[contains(text(), 'Logout')]").should("be.visible");
 });
 
 Cypress.Commands.add("verifyQuote", (author, quote) => {

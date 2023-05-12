@@ -2,18 +2,8 @@
 
 describe("Login verification", function () {
   //Hooks
-  beforeEach(function () {
-    cy.fixture("loginData.json").as("loginData");
-
-    //Session implementation
-    cy.get("@loginData").then((loginData) => {
-      cy.session(`User_${loginData.login}`, () => {
-        cy.visit("/" + "login");
-        cy.login(loginData.login, loginData.password);
-      });
-    });
-    cy.visit("/");
-    cy.xpath("//a[contains(text(), 'Logout')]").should("be.visible");
+  this.beforeEach(function () {
+    cy.login();
   });
 
   //Positive scenarios
