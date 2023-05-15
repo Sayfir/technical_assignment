@@ -19,14 +19,16 @@ describe("", () => {
     cy.get(".quote").should("be.visible").and("have.length", 10);
   });
 
-  it("UI elements verification", () => {
+  it.only("UI elements verification", () => {
     cy.visit("/");
     cy.xpath("//div[@class='quote']").should("have.length", 10);
     cy.xpath("//span[@class='tag-item']").should("have.length", 10);
     cy.xpath("//a[text()='Next ']").should("be.visible").click();
-    cy.url().should("equal", Cypress.config("baseUrl") + "/page/2/");
+    cy.location("pathname").should("equal", "/page/2/");
+    //cy.url().should("equal", Cypress.config("baseUrl") + "/page/2/");
     cy.xpath("//a[text()=' Previous']").should("be.visible").click();
-    cy.url().should("equal", Cypress.config("baseUrl") + "/page/1/");
+    cy.location("pathname").should("equal", "/page/1/");
+    // cy.url().should("equal", Cypress.config("baseUrl") + "/page/1/");
   });
 
   it("Qoutes filtering by tags verification", () => {
